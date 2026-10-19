@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>groupies 2048</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>groupies 2048</h1>
+            <div class="scores">
+                <div class="score-box">
+                    <div class="score-label">score</div>
+                    <div class="score-value" id="score">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">best</div>
+                    <div class="score-value" id="best-score">0</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="game-info">
+            <p>swipe or arrow keys to move</p>
+            <div class="btn-group">
+                <button id="undo-btn">undo</button>
+                <button id="restart-btn">restart</button>
+            </div>
+        </div>
+
+        <div class="grid-container" id="grid-container">
+            <div class="grid-background">
+                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+                <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+            </div>
+            <div class="tile-container" id="tile-container"></div>
+        </div>
+
+        <!-- 小王子文案区域 -->
+        <div class="quote-container">
+            <p class="quote-text" id="quote-text">| 真正重要的东西，用眼睛是看不见的 |</p>
+        </div>
+        
+        <!-- 底部歌词 -->
+        <footer class="bottom-footer">
+            <p class="lyric-text" id="lyric-text">漫步在荒原，我想找一棵栖身的树</p>
+        </footer>
+    </div>
+
+    <!-- 游戏结束/胜利遮罩层 -->
+    <div class="game-message" id="game-message">
+        <h2 id="message-title">game over</h2>
+        <p id="message-score">score: 0</p>
+        <div class="message-buttons">
+            <button id="try-again-btn">try again</button>
+            <button id="keep-playing-btn" style="display: none;">keep playing</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

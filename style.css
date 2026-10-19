@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Noto+Sans+SC:wght@300;400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(160deg, #e6ebf0 0%, #8ba3c4 40%, #1b3a5c 100%);
+    color: rgba(255, 255, 255, 0.85);
+    font-family: 'Montserrat', 'Noto Sans SC', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    min-height: 100vh;
+    letter-spacing: 1px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 胶片噪点质感 */
+body::before {
+    content: "";
+    position: fixed;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: overlay;
+}
+
+.container {
+    width: 470px;
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 42px;
+    font-weight: 300;
+    letter-spacing: 6px;
+    text-transform: lowercase;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.scores {
+    display: flex;
+    gap: 15px;
+}
+
+.score-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-align: center;
+    min-width: 80px;
+}
+
+.score-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+.score-value {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.game-info p {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 1);
+}
+
+.grid-container {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 15px;
+    width: 470px;
+    height: 470px;
+    touch-action: none;
+}
+
+.grid-background {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+    height: 100%;
+}
+
+.grid-cell {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+}
+
+.tile-container {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+}
+
+.tile {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 300;
+    font-size: 48px;
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: appear 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes appear {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* 低饱和度浅蓝色系数字块 */
+.tile-2 { background: rgba(255, 255, 255, 0.08); }
+.tile-4 { background: rgba(255, 255, 255, 0.12); }
+.tile-8 { background: rgba(200, 220, 240, 0.18); font-size: 40px; }
+.tile-16 { background: rgba(180, 200, 230, 0.22); font-size: 40px; }
+.tile-32 { background: rgba(160, 180, 220, 0.26); font-size: 40px; }
+.tile-64 { background: rgba(140, 160, 210, 0.30); font-size: 40px; }
+.tile-128 { background: rgba(120, 140, 200, 0.35); font-size: 32px; }
+.tile-256 { background: rgba(100, 120, 190, 0.40); font-size: 32px; }
+.tile-512 { background: rgba(80, 100, 180, 0.45); font-size: 32px; }
+.tile-1024 { background: rgba(60, 80, 170, 0.50); font-size: 24px; }
+.tile-2048 { background: rgba(40, 60, 160, 0.55); font-size: 24px; }
+.tile-super { background: rgba(20, 40, 150, 0.60); font-size: 24px; }
+
+/* 底部文案区域 */
+.quote-container {
+    margin-top: 50px;
+    text-align: center;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quote-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 3px;
+    font-weight: 300;
+    line-height: 1.8;
+    transition: opacity 0.5s ease;
+}
+
+.bottom-footer {
+    margin-top: 20px;
+    text-align: center;
+    min-height: 20px;
+}
+
+.lyric-text {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 4px;
+    font-weight: 300;
+    transition: opacity 0.5s ease;
+}
+
+/* 弹窗样式 */
+.game-message {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(10, 20, 35, 0.85);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fade-in 0.5s ease;
+}
+
+.game-message h2 {
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 20px;
+    text-transform: lowercase;
+}
+
+.game-message p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 40px;
+    letter-spacing: 3px;
+}
+
+.message-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.game-message.win h2 {
+    color: #a8c0e0;
+    text-shadow: 0 0 20px rgba(168, 192, 224, 0.3);
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 520px) {
+    .container { transform: scale(0.85); transform-origin: top center; }
+}
+@media screen and (max-width: 440px) {
+    .container { transform: scale(0.7); transform-origin: top center; }
+}
+@media screen and (max-width: 360px) {
+    .container { transform: scale(0.6); transform-origin: top center; }
+}
