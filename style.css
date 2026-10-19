@@ -159,6 +159,7 @@ button:hover {
     height: calc(100% - 30px);
 }
 
+/* 基础方块样式 */
 .tile {
     position: absolute;
     width: 100px;
@@ -169,11 +170,11 @@ button:hover {
     align-items: center;
     font-weight: 300;
     font-size: 48px;
-    color: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     animation: appear 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.2s ease-in-out;
 }
 
 @keyframes appear {
@@ -181,21 +182,96 @@ button:hover {
     100% { transform: scale(1); opacity: 1; }
 }
 
-/* 低饱和度浅蓝色系数字块 */
-.tile-2 { background: rgba(255, 255, 255, 0.08); }
-.tile-4 { background: rgba(255, 255, 255, 0.12); }
-.tile-8 { background: rgba(200, 220, 240, 0.18); font-size: 40px; }
-.tile-16 { background: rgba(180, 200, 230, 0.22); font-size: 40px; }
-.tile-32 { background: rgba(160, 180, 220, 0.26); font-size: 40px; }
-.tile-64 { background: rgba(140, 160, 210, 0.30); font-size: 40px; }
-.tile-128 { background: rgba(120, 140, 200, 0.35); font-size: 32px; }
-.tile-256 { background: rgba(100, 120, 190, 0.40); font-size: 32px; }
-.tile-512 { background: rgba(80, 100, 180, 0.45); font-size: 32px; }
-.tile-1024 { background: rgba(60, 80, 170, 0.50); font-size: 24px; }
-.tile-2048 { background: rgba(40, 60, 160, 0.55); font-size: 24px; }
-.tile-super { background: rgba(20, 40, 150, 0.60); font-size: 24px; }
+/* ================= 全新配色方案 ================= */
 
-/* 底部文案区域 */
+/* 2, 4: 极浅的海水白 / 灰白 (深蓝字) */
+.tile-2 { 
+    background: rgba(245, 248, 250, 0.9); 
+    color: #2c3e50; 
+    box-shadow: 0 0 10px rgba(245, 248, 250, 0.3);
+}
+.tile-4 { 
+    background: rgba(225, 235, 245, 0.9); 
+    color: #2c3e50; 
+    box-shadow: 0 0 12px rgba(225, 235, 245, 0.4);
+}
+
+/* 8, 16: 冰蓝色 (深蓝字) */
+.tile-8 { 
+    background: rgba(176, 224, 230, 0.85); 
+    color: #1a2a3a; 
+    font-size: 40px;
+    box-shadow: 0 0 15px rgba(176, 224, 230, 0.5);
+}
+.tile-16 { 
+    background: rgba(135, 206, 250, 0.85); 
+    color: #1a2a3a; 
+    font-size: 40px;
+    box-shadow: 0 0 18px rgba(135, 206, 250, 0.6);
+}
+
+/* 32, 64: 深海蓝 (白字) */
+.tile-32 { 
+    background: rgba(30, 60, 114, 0.9); 
+    color: #ffffff; 
+    font-size: 40px;
+    box-shadow: 0 0 20px rgba(30, 60, 114, 0.6);
+}
+.tile-64 { 
+    background: rgba(20, 40, 90, 0.95); 
+    color: #ffffff; 
+    font-size: 40px;
+    box-shadow: 0 0 25px rgba(20, 40, 90, 0.7);
+}
+
+/* 128, 256: 雾霭紫 / 灰粉色 (白字，开始增强外发光) */
+.tile-128 { 
+    background: rgba(186, 150, 170, 0.85); 
+    color: #ffffff; 
+    font-size: 32px;
+    box-shadow: 0 0 25px rgba(186, 150, 170, 0.5);
+}
+.tile-256 { 
+    background: rgba(160, 120, 140, 0.9); 
+    color: #ffffff; 
+    font-size: 32px;
+    box-shadow: 0 0 30px rgba(160, 120, 140, 0.6);
+}
+
+/* 512, 1024: 温柔的晚霞橙 / 金棕色 (白字) */
+.tile-512 { 
+    background: rgba(215, 145, 95, 0.9); 
+    color: #ffffff; 
+    font-size: 32px;
+    box-shadow: 0 0 35px rgba(215, 145, 95, 0.6);
+}
+.tile-1024 { 
+    background: rgba(195, 125, 75, 0.95); 
+    color: #ffffff; 
+    font-size: 24px;
+    box-shadow: 0 0 40px rgba(195, 125, 75, 0.7);
+}
+
+/* 2048: 发光的白金色渐变，极强的白色发光阴影 (深棕/白金字) */
+.tile-2048 { 
+    background: linear-gradient(135deg, #fff8e7 0%, #f5d7a1 50%, #ffffff 100%);
+    color: #5a4a3a; 
+    font-size: 24px;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 60px rgba(245, 215, 161, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* 超过 2048 的超级方块 */
+.tile-super { 
+    background: linear-gradient(135deg, #e6c8a8 0%, #d4a373 50%, #faedcd 100%);
+    color: #4a3b2c;
+    font-size: 24px;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.9), 0 0 80px rgba(212, 163, 115, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+/* ================= 底部文案与弹窗 ================= */
+
 .quote-container {
     margin-top: 50px;
     text-align: center;
